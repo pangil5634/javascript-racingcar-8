@@ -1,0 +1,66 @@
+import { ERROR_MESSAGES } from '../constants/index.js';
+
+export const InputValidators = {
+  validateNames(names) {
+    if (names === '') {
+      // 입력값이 공백인 경우
+    }
+
+    const nameList = names.split(',').map((name) => name.trim());
+
+    if (nameList.includes('')) {
+      // 입력값에 쉼표가 잘못 사용된 경우
+      throw new Error(ERROR_MESSAGES.INVALID_NAME_COMMA_USAGE);
+    }
+
+    nameList.map((name) => {
+      if (name.length > 5) {
+        // 이름이 5자 초과일 경우
+        throw new Error(
+          `${ERROR_MESSAGES.INVALID_NAME_LENGTH} (target : ${name})`,
+        );
+      }
+
+      const duplicateCounts = nameList.filter(
+        (name, index) => nameList.indexOf(name) !== index,
+      ).length;
+
+      if (duplicateCounts > 0) {
+        // 동일한 이름이 중복되는 경우
+        throw new Error(ERROR_MESSAGES.DUPLICATE_NAME);
+      }
+    });
+
+    return nameList;
+  },
+
+  validateRound(round) {
+    if (isNaN(round)) {
+      // 입력값이 문자열일 경우
+      throw new Error(ERROR_MESSAGES.INVALID_ROUND_NOT_NUMBER);
+    }
+
+    if (round === '') {
+      // 입력값이 공백인 경우
+      throw new Error(ERROR_MESSAGES.INVALID_ROUND_EMPTY);
+    }
+    const checkNum = Number(round);
+
+    if (checkNum % 1 !== 0) {
+      // 입력값이 소수일 경우
+      throw new Error(ERROR_MESSAGES.INVALID_ROUND_DECIMAL);
+    }
+
+    if (checkNum === 0) {
+      // 입력값이 0일 경우
+      throw new Error(ERROR_MESSAGES.INVALID_ROUND_ZERO);
+    }
+
+    if (checkNum < 0) {
+      // 입력값이 음수일 경우
+      throw new Error(ERROR_MESSAGES.INVALID_ROUND_NEGATIVE);
+    }
+
+    return checkNum;
+  },
+};
