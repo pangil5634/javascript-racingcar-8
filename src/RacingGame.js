@@ -1,4 +1,6 @@
 import Car from './model/Car.js';
+import { InputView } from './view/InputView.js';
+import { OutputView } from './view/OutputView.js';
 import { Reader } from './view/Reader.js';
 
 export default class RacingGame {
@@ -12,8 +14,14 @@ export default class RacingGame {
 
     this.cars = names.map((name) => new Car(name));
     this.round = round;
+  }
 
-    console.log(this.cars);
-    console.log(this.round);
+  start() {
+    OutputView.printStart();
+
+    for (let i = 0; i < this.round; i++) {
+      this.cars.forEach((car) => car.tryMove());
+      OutputView.printRound(this.cars);
+    }
   }
 }

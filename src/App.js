@@ -6,6 +6,7 @@ class App {
       const racingGame = new RacingGame();
 
       await racingGame.read();
+      racingGame.start();
     } catch (error) {
       throw error;
     }
