@@ -4,6 +4,7 @@ export const InputValidators = {
   validateNames(names) {
     if (names === '') {
       // 입력값이 공백인 경우
+      throw new Error(ERROR_MESSAGES.EMPTY_INPUT);
     }
 
     const nameList = names.split(',').map((name) => name.trim());
