@@ -57,4 +57,53 @@ describe("자동차 경주", () => {
     // then
     await expect(app.run()).rejects.toThrow("[ERROR]");
   });
+
+    test('정상 입력 시 경주가 정상적으로 진행된다.', async () => {
+    // given
+    const MOVING_FORWARD = 4;
+    const STOP = 3;
+    const inputs = ['pobi,crong', '1'];
+    const logs = ['pobi : -', 'crong : ', '최종 우승자 : pobi'];
+    const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+    logSpy.mockClear();
+
+    MissionUtils.Random.pickNumberInRange = jest
+      .fn()
+      .mockReturnValueOnce(MOVING_FORWARD)
+      .mockReturnValueOnce(STOP);
+    mockQuestions(inputs);
+
+    // when
+    const app = new App();
+    await app.run();
+
+    // then
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
+  });
+
+  test('정상 입력 시 경주가 정상적으로 진행된다.', async () => {
+    // given
+    const MOVING_FORWARD = 4;
+    const STOP = 3;
+    const inputs = ['pobi,woni', '1'];
+    const logs = ['pobi : -', 'woni : ', '최종 우승자 : pobi'];
+    const logSpy = getLogSpy();
+
+    MissionUtils.Random.pickNumberInRange = jest
+      .fn()
+      .mockReturnValueOnce(MOVING_FORWARD)
+      .mockReturnValueOnce(STOP);
+    mockQuestions(inputs);
+
+    // when
+    const app = new App();
+    await app.run();
+
+    // then
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
+  });
 });

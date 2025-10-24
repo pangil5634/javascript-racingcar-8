@@ -22,7 +22,7 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-describe("🏁 자동차 경주 - 시작(라운드별 출력) 테스트", () => {
+describe("자동차 경주 - 시작(라운드별 출력) 테스트", () => {
   test("라운드별 실행 결과가 올바르게 출력된다.", async () => {
     // given
     const inputs = ["pobi,woni,jun", "5"];
