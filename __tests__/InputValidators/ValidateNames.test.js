@@ -17,7 +17,6 @@ const getLogSpy = () => {
 };
 
 describe('validateNames() — 자동차 이름 검증', () => {
-
   test('[ERROR] 이름이 5자 초과일 경우', async () => {
     // given
     const inputs = ['pobiii,crong', '1'];
@@ -40,7 +39,7 @@ describe('validateNames() — 자동차 이름 검증', () => {
 
     // then
     await expect(app.run()).rejects.toThrow(
-      ERROR_MESSAGES.INVALID_NAME_COMMA_USAGE
+      ERROR_MESSAGES.INVALID_NAME_COMMA_USAGE,
     );
   });
 
@@ -54,7 +53,7 @@ describe('validateNames() — 자동차 이름 검증', () => {
 
     // then
     await expect(app.run()).rejects.toThrow(
-      ERROR_MESSAGES.INVALID_NAME_COMMA_USAGE
+      ERROR_MESSAGES.INVALID_NAME_COMMA_USAGE,
     );
   });
 

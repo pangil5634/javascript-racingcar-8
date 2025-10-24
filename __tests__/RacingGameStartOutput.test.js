@@ -1,5 +1,5 @@
-import App from "../src/App.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
+import App from '../src/App.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -17,15 +17,15 @@ const mockRandoms = (numbers) => {
 };
 
 const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
   return logSpy;
 };
 
-describe("자동차 경주 - 시작(라운드별 출력) 테스트", () => {
-  test("라운드별 실행 결과가 올바르게 출력된다.", async () => {
+describe('자동차 경주 - 시작(라운드별 출력) 테스트', () => {
+  test('라운드별 실행 결과가 올바르게 출력된다.', async () => {
     // given
-    const inputs = ["pobi,woni,jun", "5"];
+    const inputs = ['pobi,woni,jun', '5'];
     const randoms = [
       // 1라운드
       4, 4, 3,
@@ -52,25 +52,25 @@ describe("자동차 경주 - 시작(라운드별 출력) 테스트", () => {
     // 실제 출력된 로그 중 자동차 결과만 추출
     const actualLogs = logSpy.mock.calls
       .map((call) => call[0])
-      .filter((log) => log.includes(":") && !log.includes("최종 우승자"));
+      .filter((log) => log.includes(':') && !log.includes('최종 우승자'));
 
     // 각 자동차별 출력이 순서대로 누적되는지 확인
     const expected = [
-      "pobi : -",
-      "woni : -",
-      "jun : ",
-      "pobi : --",
-      "woni : --",
-      "jun : ",
-      "pobi : ---",
-      "woni : ---",
-      "jun : ",
-      "pobi : ----",
-      "woni : ----",
-      "jun : ",
-      "pobi : -----",
-      "woni : -----",
-      "jun : -",
+      'pobi : -',
+      'woni : -',
+      'jun : ',
+      'pobi : --',
+      'woni : --',
+      'jun : ',
+      'pobi : ---',
+      'woni : ---',
+      'jun : ',
+      'pobi : ----',
+      'woni : ----',
+      'jun : ',
+      'pobi : -----',
+      'woni : -----',
+      'jun : -',
     ];
 
     // 출력 개수 일치 검증

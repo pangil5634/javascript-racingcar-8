@@ -21,7 +21,7 @@ describe('validateRound() — 시도 횟수 검증', () => {
 
     // then
     await expect(app.run()).rejects.toThrow(
-      ERROR_MESSAGES.INVALID_ROUND_NOT_NUMBER
+      ERROR_MESSAGES.INVALID_ROUND_NOT_NUMBER,
     );
   });
 
@@ -34,9 +34,7 @@ describe('validateRound() — 시도 횟수 검증', () => {
     const app = new App();
 
     // then
-    await expect(app.run()).rejects.toThrow(
-      ERROR_MESSAGES.INVALID_ROUND_EMPTY
-    );
+    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.INVALID_ROUND_EMPTY);
   });
 
   test('[ERROR] 입력값이 소수일 경우', async () => {
@@ -49,7 +47,7 @@ describe('validateRound() — 시도 횟수 검증', () => {
 
     // then
     await expect(app.run()).rejects.toThrow(
-      ERROR_MESSAGES.INVALID_ROUND_DECIMAL
+      ERROR_MESSAGES.INVALID_ROUND_DECIMAL,
     );
   });
 
@@ -75,8 +73,7 @@ describe('validateRound() — 시도 횟수 검증', () => {
 
     // then
     await expect(app.run()).rejects.toThrow(
-      ERROR_MESSAGES.INVALID_ROUND_NEGATIVE
+      ERROR_MESSAGES.INVALID_ROUND_NEGATIVE,
     );
   });
-
 });
