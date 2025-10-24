@@ -16,4 +16,8 @@ export const OutputView = {
     });
     Console.print('');
   },
+
+  printWinnder(winners) {
+    Console.print(`${IO_MESSAGES.OUTPUT_WINNER}${winners}`);
+  },
 };

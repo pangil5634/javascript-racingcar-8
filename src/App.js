@@ -7,6 +7,7 @@ class App {
 
       await racingGame.read();
       racingGame.start();
+      racingGame.result();
     } catch (error) {
       throw error;
     }

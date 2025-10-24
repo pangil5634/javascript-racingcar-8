@@ -24,4 +24,13 @@ export default class RacingGame {
       OutputView.printRound(this.cars);
     }
   }
+
+  result() {
+    const maxStep = Math.max(...this.cars.map((car) => car.step));
+    const winners = this.cars
+      .filter((car) => car.step === maxStep)
+      .map((car) => car.name)
+      .join(', ');
+    OutputView.printWinnder(winners);
+  }
 }
