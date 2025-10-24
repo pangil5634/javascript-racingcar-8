@@ -36,15 +36,16 @@ export const InputValidators = {
   },
 
   validateRound(round) {
+    if (round === '') {
+      // 입력값이 공백인 경우
+      throw new Error(ERROR_MESSAGES.INVALID_ROUND_EMPTY);
+    }
+
     if (isNaN(round)) {
       // 입력값이 문자열일 경우
       throw new Error(ERROR_MESSAGES.INVALID_ROUND_NOT_NUMBER);
     }
 
-    if (round === '') {
-      // 입력값이 공백인 경우
-      throw new Error(ERROR_MESSAGES.INVALID_ROUND_EMPTY);
-    }
     const checkNum = Number(round);
 
     if (checkNum % 1 !== 0) {
