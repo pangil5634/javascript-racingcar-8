@@ -1,6 +1,6 @@
 import Car from './model/Car.js';
 import { OutputView } from './view/OutputView.js';
-import { Reader } from './view/Reader.js';
+import { readGameSettings } from './view/Reader.js';
 
 export default class RacingGame {
   constructor() {
@@ -9,7 +9,7 @@ export default class RacingGame {
   }
 
   async read() {
-    const { names, round } = await Reader();
+    const { names, round } = await readGameSettings();
 
     this.cars = names.map((name) => new Car(name));
     this.round = round;
