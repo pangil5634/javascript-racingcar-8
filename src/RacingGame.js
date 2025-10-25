@@ -1,5 +1,4 @@
 import Car from './model/Car.js';
-import { InputView } from './view/InputView.js';
 import { OutputView } from './view/OutputView.js';
 import { Reader } from './view/Reader.js';
 
@@ -31,6 +30,6 @@ export default class RacingGame {
       .filter((car) => car.step === maxStep)
       .map((car) => car.name)
       .join(', ');
-    OutputView.printWinnder(winners);
+    OutputView.printWinners(winners);
   }
 }
