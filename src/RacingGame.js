@@ -3,30 +3,28 @@ import { OutputView } from './view/OutputView.js';
 import { readGameSettings } from './view/Reader.js';
 
 export default class RacingGame {
-  constructor() {
-    this.cars = [];
-    this.round = 0;
-  }
+  #cars = [];
+  #round = 0;
 
-  async read() {
+  async #read() {
     const { names, round } = await readGameSettings();
 
-    this.cars = names.map((name) => new Car(name));
-    this.round = round;
+    this.#cars = names.map((name) => new Car(name));
+    this.#round = round;
   }
 
-  start() {
+  #start() {
     OutputView.printStart();
 
-    for (let i = 0; i < this.round; i++) {
-      this.cars.forEach((car) => car.tryMove());
-      OutputView.printRound(this.cars);
+    for (let i = 0; i < this.#round; i++) {
+      this.#cars.forEach((car) => car.tryMove());
+      OutputView.printRound(this.#cars);
     }
   }
 
-  result() {
-    const maxStep = Math.max(...this.cars.map((car) => car.step));
-    const winners = this.cars
+  #result() {
+    const maxStep = Math.max(...this.#cars.map((car) => car.step));
+    const winners = this.#cars
       .filter((car) => car.step === maxStep)
       .map((car) => car.name)
       .join(', ');
@@ -34,12 +32,8 @@ export default class RacingGame {
   }
 
   async run() {
-    try {
-      await this.read();
-      this.start();
-      this.result();
-    } catch (error) {
-      throw error;
-    }
+    await this.#read();
+    this.#start();
+    this.#result();
   }
 }
