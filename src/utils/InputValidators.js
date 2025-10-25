@@ -1,66 +1,42 @@
-import {
-  EMPTY_STRING,
-  ERROR_MESSAGES,
-  MAX_NAME_LENGTH,
-} from '../constants/index.js';
+import { NameValidator } from './validators/NameValidator.js';
+import { RoundValidator } from './validators/RoundValidator.js';
 
 export const InputValidators = {
   validateNames(names) {
-    if (names === EMPTY_STRING) {
-      // 입력값이 공백인 경우
-      throw new Error(ERROR_MESSAGES.EMPTY_INPUT);
-    }
+    // 입력값이 공백인 경우
+    NameValidator.validateEmptyName(names);
 
     const nameList = names.split(',').map((name) => name.trim());
 
-    if (nameList.includes(EMPTY_STRING)) {
-      // 입력값에 쉼표가 잘못 사용된 경우
-      throw new Error(ERROR_MESSAGES.INVALID_NAME_COMMA_USAGE);
-    }
+    // 입력값에 쉼표가 잘못 사용된 경우
+    NameValidator.checkInvalidCommaUsage(nameList);
 
-    nameList.forEach((name) => {
-      if (name.length > MAX_NAME_LENGTH) {
-        // 이름이 5자 초과일 경우
-        throw new Error(
-          `${ERROR_MESSAGES.INVALID_NAME_LENGTH} (target : ${name})`,
-        );
-      }
-    });
+    // 이름이 5자 초과일 경우
+    nameList.forEach(NameValidator.validateNameLength);
 
-    if (new Set(nameList).size !== nameList.length) {
-      throw new Error(ERROR_MESSAGES.DUPLICATE_NAME);
-    }
+    // 중복되는 이름이 존재할 경우
+    NameValidator.checkDuplicateNames(nameList);
 
     return nameList;
   },
 
   validateRound(round) {
-    if (round === EMPTY_STRING) {
-      // 입력값이 공백인 경우
-      throw new Error(ERROR_MESSAGES.INVALID_ROUND_EMPTY);
-    }
+    // 입력값이 공백인 경우
+    RoundValidator.validateEmptyRound(round);
 
-    if (isNaN(round)) {
-      // 입력값이 문자열일 경우
-      throw new Error(ERROR_MESSAGES.INVALID_ROUND_NOT_NUMBER);
-    }
+    // 입력값이 문자열일 경우
+    RoundValidator.validateRoundIsNumber(round);
 
     const checkNum = Number(round);
 
-    if (checkNum % 1 !== 0) {
-      // 입력값이 소수일 경우
-      throw new Error(ERROR_MESSAGES.INVALID_ROUND_DECIMAL);
-    }
+    // 입력값이 소수일 경우
+    RoundValidator.validateRoundIsInteger(checkNum);
 
-    if (checkNum === 0) {
-      // 입력값이 0일 경우
-      throw new Error(ERROR_MESSAGES.INVALID_ROUND_ZERO);
-    }
+    // 입력값이 0일 경우
+    RoundValidator.validateRoundIsNotZero(checkNum);
 
-    if (checkNum < 0) {
-      // 입력값이 음수일 경우
-      throw new Error(ERROR_MESSAGES.INVALID_ROUND_NEGATIVE);
-    }
+    // 입력값이 음수일 경우
+    RoundValidator.validateRoundIsPositive(checkNum);
 
     return checkNum;
   },
