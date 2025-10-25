@@ -14,23 +14,18 @@ export const InputValidators = {
       throw new Error(ERROR_MESSAGES.INVALID_NAME_COMMA_USAGE);
     }
 
-    nameList.map((name) => {
+    nameList.forEach((name) => {
       if (name.length > 5) {
         // 이름이 5자 초과일 경우
         throw new Error(
           `${ERROR_MESSAGES.INVALID_NAME_LENGTH} (target : ${name})`,
         );
       }
-
-      const duplicateCounts = nameList.filter(
-        (name, index) => nameList.indexOf(name) !== index,
-      ).length;
-
-      if (duplicateCounts > 0) {
-        // 동일한 이름이 중복되는 경우
-        throw new Error(ERROR_MESSAGES.DUPLICATE_NAME);
-      }
     });
+
+    if (new Set(nameList).size !== nameList.length) {
+      throw new Error(ERROR_MESSAGES.DUPLICATE_NAME);
+    }
 
     return nameList;
   },
