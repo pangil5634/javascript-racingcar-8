@@ -1,5 +1,5 @@
-import { NameValidator } from './validators/NameValidator.js';
-import { RoundValidator } from './validators/RoundValidator.js';
+import { NameValidator } from './NameValidator.js';
+import { RoundValidator } from './RoundValidator.js';
 
 export const InputValidators = {
   validateNames(names) {

@@ -2,7 +2,7 @@ import {
   EMPTY_STRING,
   ERROR_MESSAGES,
   MAX_NAME_LENGTH,
-} from '../../constants/index.js';
+} from '../constants/index.js';
 
 export const NameValidator = {
   validateEmptyName(names) {

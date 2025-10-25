@@ -1,10 +1,10 @@
-import RacingGame from './RacingGame.js';
+import GameController from './controller/GameController.js';
 
 class App {
   async run() {
     try {
-      const racingGame = new RacingGame();
-      await racingGame.run();
+      const gameController = new GameController();
+      await gameController.run();
     } catch (error) {
       throw error;
     }

@@ -1,4 +1,4 @@
-import { EMPTY_STRING, ERROR_MESSAGES } from '../../constants/index.js';
+import { EMPTY_STRING, ERROR_MESSAGES } from '../constants/index.js';
 
 export const RoundValidator = {
   validateEmptyRound(round) {
