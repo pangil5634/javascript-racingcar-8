@@ -32,4 +32,14 @@ export default class RacingGame {
       .join(', ');
     OutputView.printWinners(winners);
   }
+
+  async run() {
+    try {
+      await this.read();
+      this.start();
+      this.result();
+    } catch (error) {
+      throw error;
+    }
+  }
 }

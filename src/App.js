@@ -5,9 +5,7 @@ class App {
     try {
       const racingGame = new RacingGame();
 
-      await racingGame.read();
-      racingGame.start();
-      racingGame.result();
+      await racingGame.run();
     } catch (error) {
       throw error;
     }
