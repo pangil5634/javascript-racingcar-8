@@ -8,26 +8,27 @@ export default class RacingGame {
 
   async #read() {
     const { names, round } = await readGameSettings();
-
     this.#cars = names.map((name) => new Car(name));
     this.#round = round;
   }
 
   #start() {
     OutputView.printStart();
-
-    for (let i = 0; i < this.#round; i++) {
+    for (let round = 1; round <= this.#round; round++) {
       this.#cars.forEach((car) => car.tryMove());
       OutputView.printRound(this.#cars);
     }
   }
 
-  #result() {
+  #getWinners() {
     const maxStep = Math.max(...this.#cars.map((car) => car.step));
-    const winners = this.#cars
+    return this.#cars
       .filter((car) => car.step === maxStep)
-      .map((car) => car.name)
-      .join(', ');
+      .map((car) => car.name);
+  }
+
+  #result() {
+    const winners = this.#getWinners().join(', ');
     OutputView.printWinners(winners);
   }
 
