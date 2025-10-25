@@ -1,21 +1,25 @@
-import { ERROR_MESSAGES } from '../constants/index.js';
+import {
+  EMPTY_STRING,
+  ERROR_MESSAGES,
+  MAX_NAME_LENGTH,
+} from '../constants/index.js';
 
 export const InputValidators = {
   validateNames(names) {
-    if (names === '') {
+    if (names === EMPTY_STRING) {
       // 입력값이 공백인 경우
       throw new Error(ERROR_MESSAGES.EMPTY_INPUT);
     }
 
     const nameList = names.split(',').map((name) => name.trim());
 
-    if (nameList.includes('')) {
+    if (nameList.includes(EMPTY_STRING)) {
       // 입력값에 쉼표가 잘못 사용된 경우
       throw new Error(ERROR_MESSAGES.INVALID_NAME_COMMA_USAGE);
     }
 
     nameList.forEach((name) => {
-      if (name.length > 5) {
+      if (name.length > MAX_NAME_LENGTH) {
         // 이름이 5자 초과일 경우
         throw new Error(
           `${ERROR_MESSAGES.INVALID_NAME_LENGTH} (target : ${name})`,
@@ -31,7 +35,7 @@ export const InputValidators = {
   },
 
   validateRound(round) {
-    if (round === '') {
+    if (round === EMPTY_STRING) {
       // 입력값이 공백인 경우
       throw new Error(ERROR_MESSAGES.INVALID_ROUND_EMPTY);
     }
