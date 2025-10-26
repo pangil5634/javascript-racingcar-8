@@ -17,7 +17,7 @@ export default class GameController {
   #runGame() {
     OutputView.printStart();
     const roundCount = this.#racingGame.getRound();
-    for (let round = 1; i <= roundCount; i++) {
+    for (let round = 1; round <= roundCount; round++) {
       const cars = this.#racingGame.playRound();
       OutputView.printRound(cars);
     }
